@@ -2,6 +2,11 @@
 
 > 登录一次，看清网站是怎么认证你的：自动探测 Cookie / Token / OAuth / SSO 等鉴权方式，服务接口调试与凭证分析；一键复制带说明的 Prompt，让 AI 快速掌握站点接口，沉淀成可复用的 skill。
 
+<a href="https://chromewebstore.google.com/detail/pilmmhildffjeibkmlcdlheeefcccfnb"><img src="https://img.shields.io/badge/Chrome%20Web%20Store-%E5%AE%89%E8%A3%85-4285F4?logo=googlechrome&logoColor=white" alt="Chrome Web Store" height="32"></a>
+<img src="https://img.shields.io/badge/Manifest-V3-4f46e5" alt="Manifest V3" height="32">
+<img src="https://img.shields.io/badge/Chrome-116%2B-4f46e5" alt="Chrome 116+" height="32">
+<img src="https://img.shields.io/badge/License-MIT-green" alt="MIT" height="32">
+
 ## 它解决什么问题
 
 接第三方系统、写自动化脚本、给 AI Agent 接接口时，最耗时的一步常常是「先搞清楚对方靠什么认人」：是服务端 Session、JWT Cookie，还是 `Authorization: Bearer`？除了 Cookie 还要带哪些头，少一个就 403？这个 Token 什么时候过期？
@@ -12,6 +17,24 @@
 2. **复制用法说明**：带上网站、请求时需要的头部与使用约束，发给 AI 或同事都能看懂。
 
 按站点启用、随用随停；所有分析都在本地完成（Manifest V3，不联网、不上传）。具体操作见 [使用流程](#使用流程)。
+
+## 安装
+
+**方式一：从 Chrome 应用商店安装（推荐，自动更新）**
+
+<a href="https://chromewebstore.google.com/detail/pilmmhildffjeibkmlcdlheeefcccfnb"><img src="https://img.shields.io/badge/Chrome%20Web%20Store-安装-4285F4?logo=googlechrome&logoColor=white" alt="Chrome Web Store" height="32"></a>
+
+[网站鉴权分析器 · Chrome 应用商店](https://chromewebstore.google.com/detail/pilmmhildffjeibkmlcdlheeefcccfnb) —— 打开后点「添加至 Chrome」即可，支持 Chrome 116 及以上版本。
+
+**方式二：本地安装（想自己改代码或审源码）**
+
+1. 下载或克隆本仓库；
+2. 打开 Chrome，地址栏输入 `chrome://extensions`；
+3. 右上角打开「开发者模式」；
+4. 点击「加载已解压的扩展程序」，选择仓库根目录（含 `manifest.json` 的那一层）；
+5. 建议把扩展固定到工具栏（拼图图标 → 固定）。
+
+> 本地加载的是未打包版本，不会自动更新：`git pull` 后在 `chrome://extensions` 点扩展卡片上的刷新按钮，再刷新已打开的页面即可生效。
 
 ---
 
@@ -78,17 +101,6 @@
 - **凭证只存会话**：完整分析结果放在 `chrome.storage.session`，浏览器关闭自动清除；长期存储里只有站点列表和设置，不含凭证。
 - **跨域登录提示**：检测到 `api.example.com` / `login.example.com` 等同站相关域名时，可一键「补充授权」再分析。
 - **中英双语，自动跟随浏览器**：界面、悬浮框、默认说明模板都会按浏览器语言切换（中文 / 英文），无需手动设置；可在扩展页面加 `?lang=en` 预览英文界面。
-
----
-
-## 安装
-
-1. 打开 Chrome，地址栏输入 `chrome://extensions`；
-2. 右上角打开「开发者模式」；
-3. 点击「加载已解压的扩展程序」，选择本目录 `chrome-auth-plugin`；
-4. 建议把扩展固定到工具栏（拼图图标 → 固定）。
-
-> 需要 Chrome 116+（用到了 MV3 动态内容脚本、`chrome.storage.session` 等能力）。
 
 ---
 
