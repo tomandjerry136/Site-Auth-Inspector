@@ -10,7 +10,6 @@
     "test": "node --test tests/analyzer.test.mjs tests/background.test.mjs tests/customize.test.mjs tests/i18n.test.mjs",
     "test:e2e": "node tests/e2e/run.mjs",
     "svg": "node scripts/render-svg.mjs",
-    "store:assets": "node scripts/store-assets.mjs",
     "package": "node scripts/package.mjs"
   },
   "repository": {

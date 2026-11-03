@@ -290,18 +290,6 @@ background service worker
 
 ---
 
-## 发布到 Chrome Web Store
-
-```bash
-npm run package          # 自检 + 打包，产物在 dist/chrome-auth-plugin-<version>.zip
-npm run store:assets     # 可选：生成商店用的截图与宣传图到 store/
-```
-
-商店包只包含 `manifest.json`、`src/`、`icons/`、`_locales/` 共 32 个文件，不含 docs / tests / scripts / assets。
-隐私政策正文见 [PRIVACY.md](PRIVACY.md)，托管成网页后填到商店后台即可。
-
----
-
 ## 开发与测试
 
 ```text

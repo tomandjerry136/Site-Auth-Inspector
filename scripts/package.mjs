@@ -1,8 +1,8 @@
 /**
- * 打包 Chrome Web Store 上架包。
+ * 打一个只含运行期文件的 zip（manifest / src / icons / _locales）。
  *
- * 只收录运行期必需的文件（manifest / src / icons / _locales），
- * 排除 docs、tests、scripts、assets、README、package.json 等开发文件。
+ * 排除 docs、tests、scripts、assets、README、package.json 等开发文件，
+ * 便于分发给别人安装或自行压缩上传。
  *
  * 用法：node scripts/package.mjs [--skip-check]
  * 产物：dist/chrome-auth-plugin-<version>.zip
