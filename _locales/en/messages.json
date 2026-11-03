@@ -1,0 +1,107 @@
+{
+  "appName": {
+    "message": "Site Auth Inspector"
+  },
+  "appShort": {
+    "message": "Auth Inspector"
+  },
+  "appDesc": {
+    "message": "Analyze how a website authenticates you after sign-in, then copy the login data or a ready-to-use auth config with instructions."
+  },
+  "overlayRecording": {
+    "message": "Recording your sign-in"
+  },
+  "overlayRecordingText": {
+    "message": "Just sign in normally. When you are done, click the button below to see how this site recognizes logins."
+  },
+  "overlayRecordingCount": {
+    "message": "$1 requests recorded"
+  },
+  "overlayPill": {
+    "message": "Recording · $1 requests"
+  },
+  "overlayFinishPill": {
+    "message": "Analyze"
+  },
+  "overlayFinish": {
+    "message": "Signed in — analyze now"
+  },
+  "overlayAnalyzing": {
+    "message": "Analyzing…"
+  },
+  "overlayAnalyzingText": {
+    "message": "Reading login data…"
+  },
+  "overlayUnknownTitle": {
+    "message": "No login data detected yet"
+  },
+  "overlayUnknownText": {
+    "message": "Looks like the sign-in did not complete. Click “Keep recording”, then analyze again when you are done."
+  },
+  "overlayContinue": {
+    "message": "Keep recording"
+  },
+  "overlayDetails": {
+    "message": "View details"
+  },
+  "overlayDone": {
+    "message": "Analysis complete"
+  },
+  "overlayConfidence": {
+    "message": "Confidence $1% · $2"
+  },
+  "overlayEmptyCred": {
+    "message": "No login data was read. Make sure you are signed in, or click “Analyze again”."
+  },
+  "overlayShowFull": {
+    "message": "Show full value"
+  },
+  "overlayHideFull": {
+    "message": "Hide full value"
+  },
+  "overlayCopyRaw": {
+    "message": "Copy login data"
+  },
+  "overlayCopyPrompt": {
+    "message": "Copy usage notes"
+  },
+  "overlayRetry": {
+    "message": "Analyze again"
+  },
+  "overlayOpenReport": {
+    "message": "Open full report"
+  },
+  "overlayMulti": {
+    "message": "Both cookies and a token are needed — use “Copy usage notes”."
+  },
+  "overlaySource": {
+    "message": "From: $1"
+  },
+  "overlayNoContent": {
+    "message": "Nothing to copy"
+  },
+  "overlayCopyFailed": {
+    "message": "Copy failed — open the extension popup to copy manually"
+  },
+  "overlayCopied": {
+    "message": "$1 copied ✓"
+  },
+  "overlayPermissionRevoked": {
+    "message": "Access to this site was revoked — enable it again in the extension."
+  },
+  "overlayCollapse": {
+    "message": "Collapse"
+  },
+  "overlayExpand": {
+    "message": "Expand"
+  },
+  "overlayClose": {
+    "message": "Close"
+  },
+  "overlayStop": {
+    "message": "Stop recording"
+  },
+  "overlayUnidentified": {
+    "message": "Not identified"
+  }
+}

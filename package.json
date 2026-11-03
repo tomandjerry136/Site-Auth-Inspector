@@ -1,0 +1,22 @@
+{
+  "name": "site-auth-inspector",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Chrome extension: detect how a website authenticates you (cookies, tokens, OAuth, SSO) and copy the credential or a ready-to-use auth config.",
+  "scripts": {
+    "icons": "node scripts/render-svg.mjs && node scripts/make-icons.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test tests/analyzer.test.mjs tests/background.test.mjs tests/customize.test.mjs tests/i18n.test.mjs",
+    "test:e2e": "node tests/e2e/run.mjs",
+    "svg": "node scripts/render-svg.mjs",
+    "store:assets": "node scripts/store-assets.mjs",
+    "package": "node scripts/package.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomandjerry136/Site-Auth-Inspector.git"
+  },
+  "homepage": "https://github.com/tomandjerry136/Site-Auth-Inspector",
+  "license": "MIT"
+}

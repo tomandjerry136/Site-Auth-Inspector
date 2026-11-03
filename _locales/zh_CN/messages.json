@@ -1,0 +1,107 @@
+{
+  "appName": {
+    "message": "网站鉴权分析器"
+  },
+  "appShort": {
+    "message": "Auth Inspector"
+  },
+  "appDesc": {
+    "message": "按站点授权后，登录完成即可自动分析网站的登录鉴权方式，并一键复制登录信息或带说明的认证配置。"
+  },
+  "overlayRecording": {
+    "message": "正在记录登录过程"
+  },
+  "overlayRecordingText": {
+    "message": "正常登录就行。登录完成后点下面的按钮，就能看到这个网站是怎么识别登录的。"
+  },
+  "overlayRecordingCount": {
+    "message": "已记录 $1 个请求"
+  },
+  "overlayPill": {
+    "message": "记录中 · $1 个请求"
+  },
+  "overlayFinishPill": {
+    "message": "结束分析"
+  },
+  "overlayFinish": {
+    "message": "登录好了，结束分析"
+  },
+  "overlayAnalyzing": {
+    "message": "正在分析…"
+  },
+  "overlayAnalyzingText": {
+    "message": "正在读取登录信息…"
+  },
+  "overlayUnknownTitle": {
+    "message": "还没识别到登录信息"
+  },
+  "overlayUnknownText": {
+    "message": "看起来还没登录成功。可以点「继续记录」，登录完成后再结束分析。"
+  },
+  "overlayContinue": {
+    "message": "继续记录"
+  },
+  "overlayDetails": {
+    "message": "查看详情"
+  },
+  "overlayDone": {
+    "message": "分析完成"
+  },
+  "overlayConfidence": {
+    "message": "可信度 $1% · $2"
+  },
+  "overlayEmptyCred": {
+    "message": "没有读取到登录信息，请确认已经登录，或点「重新分析」再试一次"
+  },
+  "overlayShowFull": {
+    "message": "显示完整值"
+  },
+  "overlayHideFull": {
+    "message": "隐藏完整值"
+  },
+  "overlayCopyRaw": {
+    "message": "复制登录信息"
+  },
+  "overlayCopyPrompt": {
+    "message": "复制用法说明"
+  },
+  "overlayRetry": {
+    "message": "重新分析"
+  },
+  "overlayOpenReport": {
+    "message": "查看完整报告"
+  },
+  "overlayMulti": {
+    "message": "要同时带上 Cookie 和 Token，建议用「复制用法说明」。"
+  },
+  "overlaySource": {
+    "message": "来源：$1"
+  },
+  "overlayNoContent": {
+    "message": "没有可复制的内容"
+  },
+  "overlayCopyFailed": {
+    "message": "复制失败，请打开扩展弹窗手动复制"
+  },
+  "overlayCopied": {
+    "message": "$1已复制 ✓"
+  },
+  "overlayPermissionRevoked": {
+    "message": "站点权限已被撤销，请在扩展里重新启用。"
+  },
+  "overlayCollapse": {
+    "message": "收起"
+  },
+  "overlayExpand": {
+    "message": "展开"
+  },
+  "overlayClose": {
+    "message": "关闭"
+  },
+  "overlayStop": {
+    "message": "停止记录"
+  },
+  "overlayUnidentified": {
+    "message": "未识别"
+  }
+}

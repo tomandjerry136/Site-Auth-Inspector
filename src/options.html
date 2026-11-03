@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title data-i18n="options.pageTitle">网站鉴权分析器 · 设置</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="page-header">
+        <img src="../icons/icon48.png" alt="" width="42" height="42" />
+        <div class="page-title">
+          <h1 data-i18n="app.name">网站鉴权分析器</h1>
+          <p data-i18n="options.title">设置 · 站点管理</p>
+        </div>
+        <span id="version" class="version">v0.1.0</span>
+      </header>
+
+      <main class="page-body">
+        <section class="card">
+          <div class="card-head">
+            <h2 data-i18n="options.language.title">界面语言</h2>
+            <p data-i18n="options.language.desc">默认跟随浏览器；也可以在这里固定为中文或 English。</p>
+          </div>
+          <label class="select-row">
+            <span class="sr-only" data-i18n="options.language.label">语言</span>
+            <select id="language" class="select">
+              <option value="auto" data-i18n="options.language.auto">自动（跟随浏览器）</option>
+              <option value="zh" data-i18n="options.language.zh">中文</option>
+              <option value="en" data-i18n="options.language.en">English</option>
+            </select>
+            <span id="language-state" class="save-state" role="status"></span>
+          </label>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2 data-i18n="options.template.title">提示词模板</h2>
+            <p data-i18n-html="options.template.desc">「复制用法说明」会按这份模板生成文本，支持 <code>{{占位符}}</code>。</p>
+          </div>
+
+          <textarea id="template" class="template" spellcheck="false" data-i18n-aria-label="options.template.placeholder" aria-label="提示词模板"></textarea>
+
+          <div class="placeholder-block">
+            <span class="block-label" data-i18n="options.placeholders">可用占位符（点击插入到光标处）</span>
+            <div id="placeholders" class="chips"></div>
+          </div>
+
+          <div class="options-row">
+            <label class="checkbox"><input type="checkbox" id="include-evidence" /><span data-i18n="options.includeEvidence">说明里附带「为什么这么判断」</span></label>
+            <label class="checkbox"><input type="checkbox" id="include-warnings" /><span data-i18n="options.includeWarnings">说明里附带「注意事项」</span></label>
+            <label class="checkbox"><input type="checkbox" id="mask-default" /><span data-i18n="options.maskDefault">结果默认隐藏完整内容</span></label>
+          </div>
+
+          <div class="actions">
+            <button id="save" class="btn btn-primary" type="button" data-i18n="options.save">保存设置</button>
+            <button id="reset" class="btn btn-ghost" type="button" data-i18n="options.reset">恢复默认模板</button>
+            <span id="save-state" class="save-state" role="status"></span>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2 data-i18n="options.sites.title">已启用的网站</h2>
+            <p data-i18n="options.sites.desc">停用会撤销该站点的权限、移除采集脚本，并清除分析结果。</p>
+          </div>
+          <ul id="site-list" class="site-list"></ul>
+          <p id="site-empty" class="empty hidden" data-i18n="options.sites.empty">还没有启用任何网站。打开目标网站后点击扩展图标即可启用。</p>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2 data-i18n="options.privacy.title">隐私与安全</h2>
+          </div>
+          <ul class="notes">
+            <li data-i18n="options.privacy.1">只有你在某个网站上手动启用并允许后，扩展才会读取它的 Cookie、本地存储和接口请求。</li>
+            <li data-i18n="options.privacy.2">分析完全在本地进行，不会把任何数据上传到服务器。</li>
+            <li data-i18n="options.privacy.3">复制出的登录信息等同于登录状态，请像对待密码一样保管，不要粘贴到不可信的网站或公开对话中。</li>
+            <li data-i18n="options.privacy.4">完整分析结果（含登录信息）只保存在浏览器会话中，关闭浏览器后自动清除；站点列表与设置本身不含登录信息。</li>
+            <li data-i18n="options.privacy.5">停用站点会立即撤销对应权限，已保存的分析结果同时删除。</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

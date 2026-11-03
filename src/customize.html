@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title data-i18n="customize.pageTitle">自定义复制内容 · 网站鉴权分析器</title>
+    <link rel="stylesheet" href="customize.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="page-header">
+        <img src="../icons/icon48.png" alt="" width="42" height="42" />
+        <div class="page-title">
+          <h1 data-i18n="customize.title">自定义复制内容</h1>
+          <p id="site-line" data-i18n="customize.loading">正在读取分析结果…</p>
+        </div>
+        <a id="back-link" class="btn btn-ghost" href="#" data-i18n="customize.back">查看完整报告</a>
+      </header>
+
+      <main class="layout">
+        <section class="card editor">
+          <div class="card-head">
+            <h2 data-i18n="customize.editor.title">选择要携带的凭证</h2>
+            <p data-i18n="customize.editor.desc">勾选需要的内容，也可以直接改值或添加自定义项；右侧预览会实时更新。</p>
+          </div>
+
+          <div class="tabs" id="tabs">
+            <button type="button" class="tab is-active" data-filter="all" data-i18n="customize.tab.all">全部</button>
+            <button type="button" class="tab" data-filter="header" data-i18n="customize.tab.header">请求头</button>
+            <button type="button" class="tab" data-filter="cookie" data-i18n="customize.tab.cookie">Cookie</button>
+            <button type="button" class="tab" data-filter="query" data-i18n="customize.tab.query">URL 参数</button>
+            <span id="summary" class="summary"></span>
+          </div>
+
+          <div id="rows" class="rows" role="group" aria-label="凭证候选项"></div>
+
+          <form id="add-form" class="add-form">
+            <select id="add-source" aria-label="类型">
+              <option value="header" data-i18n="customize.add.header">请求头</option>
+              <option value="cookie" data-i18n="customize.add.cookie">Cookie</option>
+              <option value="query" data-i18n="customize.add.query">URL 参数</option>
+            </select>
+            <input id="add-name" data-i18n-placeholder="customize.add.name" placeholder="名称，如 X-Trace-Id / my_cookie / debug" autocomplete="off" spellcheck="false" />
+            <input id="add-value" data-i18n-placeholder="customize.add.value" placeholder="值" autocomplete="off" spellcheck="false" />
+            <button id="add-btn" class="btn btn-soft" type="submit" data-i18n="customize.add.button">添加</button>
+          </form>
+
+          <div class="editor-footer">
+            <button id="reset-btn" class="mini-link" type="button" data-i18n="customize.reset">恢复推荐项</button>
+            <span id="save-state" class="save-state" role="status"></span>
+          </div>
+        </section>
+
+        <aside class="preview">
+          <section class="card">
+            <div class="card-head">
+              <h2 data-i18n="customize.preview.rawTitle">登录信息（纯内容）</h2>
+              <p data-i18n="customize.preview.rawDesc">只有凭证本身，粘到调试工具里用。</p>
+            </div>
+            <pre id="preview-raw" class="code"></pre>
+            <button id="copy-raw" class="btn btn-soft btn-block" type="button" data-i18n="popup.copy.rawTitle">复制登录信息</button>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <h2 data-i18n="customize.preview.promptTitle">用法说明</h2>
+              <p data-i18n="customize.preview.promptDesc">带上网站和用法，发给 AI 或同事都能看懂。</p>
+            </div>
+            <pre id="preview-prompt" class="code code-tall"></pre>
+            <button id="copy-prompt" class="btn btn-primary btn-block" type="button" data-i18n="popup.copy.promptTitle">复制用法说明</button>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <h2 data-i18n="customize.preview.headersTitle">请求时带上这些</h2>
+              <p data-i18n="customize.preview.headersDesc">与上面「用法说明」中的请求头完全一致。</p>
+            </div>
+            <pre id="preview-headers" class="code"></pre>
+            <button id="copy-headers" class="btn btn-ghost btn-block" type="button" data-i18n="popup.result.copyAll">全部复制</button>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="customize.js"></script>
+  </body>
+</html>

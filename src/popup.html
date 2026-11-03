@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title data-i18n="app.name">网站鉴权分析器</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div id="progress" class="progress hidden" aria-hidden="true"><span></span></div>
+
+      <header class="app-header">
+        <div class="brand">
+          <img class="brand-logo" src="../icons/icon48.png" alt="" width="34" height="34" />
+          <div class="brand-text">
+            <h1 data-i18n="app.name">网站鉴权分析器</h1>
+            <p data-i18n="app.tagline">只在你允许的网站上生效</p>
+          </div>
+        </div>
+        <button id="open-options" class="icon-btn" type="button" data-i18n-title="app.settings" data-i18n-aria-label="app.openSettings" title="设置" aria-label="打开设置">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm0 5.5a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm8.4-1.5c0-.4 0-.8-.1-1.2l2-1.5-2-3.4-2.3.9c-.6-.5-1.3-.9-2-1.2L15.6 3h-4l-.4 2.4c-.7.3-1.4.7-2 1.2l-2.3-.9-2 3.4 2 1.5a7 7 0 0 0 0 2.4l-2 1.5 2 3.4 2.3-.9c.6.5 1.3.9 2 1.2l.4 2.4h4l.4-2.4c.7-.3 1.4-.7 2-1.2l2.3.9 2-3.4-2-1.5c.1-.4.1-.8.1-1.2Z"
+            />
+          </svg>
+        </button>
+      </header>
+
+      <main class="app-body">
+        <section class="site-card">
+          <img id="site-favicon" class="site-favicon" src="../icons/icon32.png" alt="" width="26" height="26" />
+          <div class="site-meta">
+            <div id="site-host" class="site-host">—</div>
+            <div id="site-origin" class="site-origin">—</div>
+          </div>
+          <div class="site-actions">
+            <span id="site-status" class="pill" data-state="off">未启用</span>
+            <button id="disable-link" class="btn btn-ghost btn-xs btn-danger" type="button" data-i18n="popup.disable">
+              停用
+            </button>
+          </div>
+        </section>
+
+
+        <section id="unsupported-panel" class="panel hidden">
+          <h2 class="panel-title" data-i18n="popup.unsupportedTitle">当前页面无法分析</h2>
+          <p id="unsupported-text" class="panel-text"></p>
+        </section>
+
+        <section id="enable-panel" class="panel hidden">
+          <h2 class="panel-title" data-i18n="popup.enable.title">启用这个网站</h2>
+          <p id="enable-desc" class="panel-text" data-i18n="popup.enable.desc">
+            点下面的按钮后，Chrome 会问你「是否允许读取这个网站」。允许后，扩展会读取这个网站的登录信息（Cookie、本地存储和接口请求），用来判断它是怎么识别你已登录的。
+          </p>
+          <ul class="check-list">
+            <li data-i18n="popup.enable.check1">只有你点了「允许」才会生效</li>
+            <li data-i18n="popup.enable.check2">所有分析都在本机完成，不会上传</li>
+            <li data-i18n="popup.enable.check3">随时可以停用并收回权限</li>
+          </ul>
+          <button id="enable-btn" class="btn btn-primary btn-block" type="button" data-i18n="popup.enable.button">启用此网站</button>
+          <p id="granted-hint" class="hint hidden" data-i18n="popup.enable.grantedHint">已具备该站点权限，点击上方按钮完成启用。</p>
+          <p id="enable-error" class="error-text hidden" role="alert"></p>
+        </section>
+
+        <section id="flow-panel" class="panel hidden">
+          <div id="recording-banner" class="recording-banner">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <b id="recording-title" data-i18n="popup.flow.recording">正在记录登录过程</b>
+            <span id="recording-count" class="banner-hint"></span>
+          </div>
+
+          <ol class="steps">
+            <li class="step is-done">
+              <span class="step-dot">1</span>
+              <div class="step-body">
+                <b data-i18n="popup.flow.step1.title">启用权限 · 已开始记录</b>
+                <p data-i18n="popup.flow.step1.desc">网站右下角会出现一个小悬浮框，正常登录即可</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-dot">2</span>
+              <div class="step-body">
+                <b data-i18n="popup.flow.step2.title">登录后刷新页面</b>
+                <p id="step2-desc" data-i18n="popup.flow.step2.desc">刷新一次，这样登录过程也能被记下来，识别会更准</p>
+                <div class="step-actions">
+                  <button id="reload-btn" class="btn btn-ghost btn-xs" type="button" data-i18n="popup.flow.reload">刷新页面</button>
+                </div>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-dot">3</span>
+              <div class="step-body">
+                <b data-i18n="popup.flow.step3.title">点「登录好了，结束分析」</b>
+                <p data-i18n="popup.flow.step3.desc">悬浮框里会直接显示结果和复制按钮，也可以回到这里点下面的按钮</p>
+              </div>
+            </li>
+          </ol>
+
+          <button id="analyze-btn" class="btn btn-primary btn-block" type="button" data-i18n="popup.flow.analyze">登录好了，结束分析</button>
+          <div id="start-btn-row" class="flow-actions hidden">
+            <span class="hint" style="margin: 0" data-i18n="popup.flow.notRecording">当前不在记录中</span>
+            <button id="start-btn" class="btn btn-ghost btn-sm" type="button" data-i18n="popup.flow.restart">重新开始记录</button>
+          </div>
+          <p class="hint" data-i18n="popup.flow.footnote">记录只在本机进行，不会上传；悬浮框和这里的按钮都能结束分析。</p>
+        </section>
+
+        <section id="loading-panel" class="panel panel-center hidden">
+          <div class="spinner" aria-hidden="true"></div>
+          <p class="panel-text" data-i18n="popup.loading">正在读取登录信息…</p>
+        </section>
+
+        <section id="error-panel" class="panel hidden">
+          <h2 class="panel-title" data-i18n="popup.analyzeFailed">分析失败</h2>
+          <p id="error-text" class="panel-text"></p>
+          <button id="error-retry" class="btn btn-ghost btn-block" type="button" data-i18n="popup.retry">重新分析</button>
+        </section>
+
+        <section id="result-panel" class="hidden">
+          <div class="result-head">
+            <div class="result-heading">
+              <div class="eyebrow-row">
+                <span class="eyebrow" data-i18n="popup.result.eyebrow">这个网站怎么识别登录</span>
+                <button id="retry-btn" class="retry-btn" type="button" data-i18n-title="popup.retryTitle" title="重新记录并再分析一次">
+                  <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7Z"
+                    />
+                  </svg>
+                  <span data-i18n="popup.retry">重新分析</span>
+                </button>
+              </div>
+              <h2 id="mech-label" class="mech-label">—</h2>
+            </div>
+            <div class="conf">
+              <span id="conf-num" class="conf-num">—</span>
+              <span class="conf-label" data-i18n="popup.result.confidence">可信度</span>
+            </div>
+          </div>
+          <div class="conf-bar"><div id="conf-fill" class="conf-fill" data-level="low"></div></div>
+          <p id="mech-desc" class="mech-desc"></p>
+
+          <div class="cred-card">
+            <div class="cred-head">
+              <span id="cred-label" class="cred-label" data-i18n="popup.result.credLabel">凭证</span>
+              <button id="toggle-mask" class="mini-link hidden" type="button" data-i18n="popup.result.showFull">显示完整内容</button>
+            </div>
+            <pre id="cred-value" class="cred-value"></pre>
+            <div class="cred-meta">
+              <span id="cred-source" class="cred-source"></span>
+              <span id="cred-expiry" class="cred-expiry"></span>
+            </div>
+          </div>
+
+          <div class="copy-grid">
+            <button id="copy-raw" class="copy-btn" type="button">
+              <span class="copy-title" data-i18n="popup.copy.rawTitle">复制登录信息</span>
+              <span class="copy-sub" data-i18n="popup.copy.rawSub">只有 Cookie、Token 这些内容</span>
+            </button>
+            <button id="copy-prompt" class="copy-btn copy-btn-alt" type="button">
+              <span class="copy-title" data-i18n="popup.copy.promptTitle">复制用法说明</span>
+              <span class="copy-sub" data-i18n="popup.copy.promptSub">带上网站和用法，发给 AI 或同事</span>
+            </button>
+          </div>
+
+          <button id="customize-btn" class="customize-entry" type="button">
+            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M3 17v2h6v-2H3Zm0-12v2h10V5H3Zm10 16v-2h8v-2h-8v-2h-2v6h2ZM7 9v2H3v2h4v2h2V9H7Zm14 4v-2H11v2h10Zm-6-4h2V7h4V5h-4V3h-2v6Z"
+              />
+            </svg>
+            <span data-i18n="popup.customize">自定义请求头 / Cookie / URL 参数</span>
+          </button>
+          <p id="multi-note" class="hint hidden" data-i18n="popup.result.multiNote">
+            这个网站要同时带上 Cookie 和 Token，建议用「复制用法说明」，或者把下面的请求头一起复制。
+          </p>
+
+          <details class="acc">
+            <summary>
+              <span data-i18n="popup.result.headers">请求时带上这些</span>
+              <span id="header-count" class="acc-count"></span>
+            </summary>
+            <div id="headers-list" class="header-list"></div>
+            <button id="copy-headers" class="btn btn-ghost btn-sm" type="button" data-i18n="popup.result.copyAll">全部复制</button>
+          </details>
+
+          <details class="acc">
+            <summary>
+              <span data-i18n="popup.result.evidence">为什么这么判断</span>
+              <span id="evidence-count" class="acc-count"></span>
+            </summary>
+            <ul id="evidence-list" class="evidence-list"></ul>
+          </details>
+
+          <div id="warnings" class="warnings"></div>
+
+          <div id="suggested" class="suggest hidden">
+            <p id="suggested-text" class="suggest-text"></p>
+            <button id="suggested-btn" class="btn btn-ghost btn-sm" type="button" data-i18n="popup.result.supplement">补充授权</button>
+          </div>
+
+          <div class="result-footer">
+            <span id="analyzed-at" class="analyzed-at"></span>
+          </div>
+        </section>
+
+        <div id="last-hint" class="last-hint hidden"></div>
+      </main>
+
+      <footer class="app-footer">
+        <span data-i18n="app.footerNote">登录信息只在本机处理，关掉浏览器后自动清除</span>
+        <button id="footer-options" class="mini-link" type="button" data-i18n="app.settings">设置</button>
+      </footer>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>
